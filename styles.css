@@ -1,0 +1,283 @@
+/* Mexidão de Promoções — cores tiradas do logotipo e da arte original */
+:root {
+  --ameixa: #3a144f;        /* fundo do logotipo */
+  --noite: #2b0153;         /* fim do degradê original */
+  --violeta: #8400be;       /* início do degradê original */
+  --laranja: #fd8e09;       /* sacola e cupom */
+  --coral: #ff5021;         /* lado vermelho da sacola */
+  --papel: #fcf5ef;         /* papel do cupom */
+  --branco: #ffffff;
+  --texto-suave: #e6d9ef;
+
+  --display: "Luckiest Guy", "Arial Black", system-ui, sans-serif;
+  --texto: "Rubik", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --gutter: 16px;
+  --largura: 1120px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--ameixa);
+  color: var(--branco);
+  font-family: var(--texto);
+  font-size: 1rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img, svg { display: block; max-width: 100%; }
+h1, h2, p, ul, ol, figure { margin: 0; }
+
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--laranja); outline-offset: 3px; border-radius: 6px; }
+
+.pular {
+  position: absolute; left: var(--gutter); top: -60px; z-index: 10;
+  background: var(--papel); color: var(--noite); padding: 10px 14px; border-radius: 8px; font-weight: 700;
+}
+.pular:focus { top: 12px; }
+
+h1, h2 {
+  font-family: var(--display);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- topo ---------- */
+.topo {
+  max-width: var(--largura);
+  margin: 0 auto;
+  padding: 14px var(--gutter);
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.marca { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+.marca img { width: 52px; height: 49px; object-fit: contain; }
+
+.redes { display: flex; gap: 4px; }
+.redes a {
+  display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%;
+  color: var(--texto-suave);
+}
+.redes a:hover { color: var(--laranja); }
+.redes svg { width: 22px; height: 22px; }
+
+/* ---------- primeira dobra ---------- */
+.hero {
+  position: relative;
+  max-width: var(--largura);
+  margin: 0 auto;
+  padding: 20px var(--gutter) 64px;
+  display: grid;
+  gap: 20px;
+}
+.hero h1 { font-size: clamp(2.4rem, 10.5vw, 4.4rem); max-width: 13ch; }
+.hero__sub { margin-top: 14px; font-size: 1.125rem; color: var(--texto-suave); max-width: 36ch; }
+
+.hero__logo { display: none; }
+
+/* círculos de % da arte original */
+.selo-pct {
+  position: absolute; display: grid; place-items: center;
+  width: 52px; height: 52px; border-radius: 50%;
+  border: 1.5px dashed rgb(255 255 255 / 0.35);
+  color: rgb(255 255 255 / 0.7); font-size: 1.2rem; font-weight: 500;
+  pointer-events: none;
+}
+.selo-pct--a { right: var(--gutter); top: 4px; }
+.selo-pct--b { display: none; }
+
+/* ---------- cupom ---------- */
+.cupom {
+  position: relative;
+  margin-top: 26px;
+}
+.cupom__moldura {
+  padding: 10px;
+  background: var(--laranja);
+  /* bordas recortadas do cupom */
+  -webkit-mask:
+    radial-gradient(circle at 0 50%, #0000 6px, #000 6.5px) 0 0 / 51% 20px repeat-y,
+    radial-gradient(circle at 100% 50%, #0000 6px, #000 6.5px) 100% 0 / 51% 20px repeat-y;
+          mask:
+    radial-gradient(circle at 0 50%, #0000 6px, #000 6.5px) 0 0 / 51% 20px repeat-y,
+    radial-gradient(circle at 100% 50%, #0000 6px, #000 6.5px) 100% 0 / 51% 20px repeat-y;
+}
+.cupom__mascote {
+  position: absolute; right: 18px; top: -30px; z-index: 2;
+  width: 88px; height: auto;
+  filter: drop-shadow(0 4px 6px rgb(0 0 0 / 0.3));
+  transform: rotate(8deg);
+}
+.cupom__papel {
+  background: var(--papel);
+  color: var(--noite);
+  border-radius: 4px;
+  display: grid;
+}
+.cupom__corpo { padding: 22px 20px 18px; padding-right: 96px; }
+.cupom__titulo { font-family: var(--display); font-size: 2rem; line-height: 1; color: var(--coral); }
+.cupom__lista { list-style: none; padding: 0; margin-top: 12px; display: grid; gap: 6px; font-weight: 500; }
+.cupom__lista li { display: flex; gap: 10px; align-items: baseline; }
+.cupom__lista li::before {
+  content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--laranja); transform: translateY(-2px);
+}
+
+/* linha de picote, na horizontal no celular */
+.cupom__picote {
+  position: relative; height: 0;
+  border-top: 2px dashed rgb(43 1 83 / 0.35);
+  margin: 0 14px;
+}
+.cupom__tesoura {
+  position: absolute; left: -2px; top: -12px; width: 22px; height: 22px;
+  color: var(--noite); background: var(--papel); transform: rotate(0deg);
+}
+
+.cupom__canhoto { padding: 18px 20px 20px; display: grid; gap: 8px; justify-items: stretch; text-align: center; }
+.cupom__nota { font-size: 0.875rem; color: rgb(43 1 83 / 0.72); }
+
+/* ---------- botão ---------- */
+.botao {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 56px; padding: 12px 22px;
+  background: var(--coral); color: var(--branco);
+  border-radius: 12px;
+  font-family: var(--display); font-size: clamp(1.1rem, 5vw, 1.3rem); letter-spacing: 0.03em; line-height: 1.1;
+  text-decoration: none;
+  box-shadow: 0 4px 0 #b8330f;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.botao svg { width: 24px; height: 24px; flex: none; }
+.botao:hover { transform: translateY(-1px); box-shadow: 0 5px 0 #b8330f; }
+.botao:active { transform: translateY(3px); box-shadow: 0 1px 0 #b8330f; }
+
+/* ---------- lojas ---------- */
+.lojas {
+  background: linear-gradient(45deg, var(--violeta) 0%, var(--noite) 90%);
+  padding: 56px var(--gutter);
+  display: grid; gap: 28px;
+}
+.lojas > * { max-width: var(--largura); }
+.lojas h2 { font-size: clamp(1.9rem, 7vw, 2.8rem); max-width: 16ch; }
+.lojas__texto p { margin-top: 14px; max-width: 54ch; color: var(--texto-suave); font-size: 1.0625rem; }
+.lojas__texto .lojas__onde { color: var(--branco); font-weight: 500; }
+.lojas__texto .botao { margin-top: 24px; }
+.lojas__marcas { display: flex; align-items: center; gap: 22px; }
+.marca-loja--amazon { width: 150px; border-radius: 4px; }
+.marca-loja--ml { width: 58px; }
+
+/* ---------- passos ---------- */
+.passos {
+  max-width: var(--largura); margin: 0 auto;
+  padding: 56px var(--gutter);
+}
+.passos h2 { font-size: clamp(1.9rem, 7vw, 2.8rem); }
+.passos__lista {
+  list-style: none; padding: 0; margin-top: 24px;
+  counter-reset: passo;
+  display: grid; gap: 22px;
+}
+.passos__lista li {
+  counter-increment: passo;
+  display: grid; grid-template-columns: 48px 1fr; column-gap: 14px; align-items: start;
+}
+.passos__lista li::before {
+  content: counter(passo);
+  grid-row: span 2;
+  display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%;
+  background: var(--laranja); color: var(--noite);
+  font-family: var(--display); font-size: 1.5rem; line-height: 1; padding-top: 4px;
+}
+.passos__lista strong { font-size: 1.125rem; font-weight: 700; padding-top: 2px; }
+.passos__lista span { color: var(--texto-suave); }
+
+/* ---------- CTA final ---------- */
+.final {
+  margin: 0 var(--gutter) 56px;
+  padding: 40px 22px;
+  background: var(--papel); color: var(--noite);
+  border-radius: 20px;
+  border: 10px solid var(--laranja);
+  text-align: center;
+  display: grid; justify-items: center; gap: 14px;
+}
+.final h2 { font-size: clamp(1.8rem, 7vw, 2.8rem); color: var(--ameixa); max-width: 18ch; }
+.final p { max-width: 40ch; font-size: 1.0625rem; }
+.final .botao { margin-top: 8px; width: 100%; max-width: 380px; }
+
+/* ---------- rodapé ---------- */
+.rodape {
+  background: var(--noite);
+  padding: 40px var(--gutter) 48px;
+  text-align: center;
+  display: grid; justify-items: center; gap: 14px;
+}
+.rodape__redes-titulo { font-weight: 500; }
+.redes--rodape { flex-wrap: wrap; justify-content: center; gap: 8px; }
+.redes--rodape a {
+  width: auto; height: 44px; padding: 0 16px; border-radius: 22px;
+  display: inline-flex; gap: 8px; text-decoration: none;
+  border: 1.5px solid rgb(255 255 255 / 0.25); color: var(--branco);
+}
+.redes--rodape a:hover { border-color: var(--laranja); color: var(--laranja); }
+.redes--rodape svg { width: 20px; height: 20px; }
+.rodape__aviso { max-width: 56ch; font-size: 0.875rem; color: var(--texto-suave); }
+.rodape__nome { font-size: 0.875rem; color: rgb(255 255 255 / 0.6); }
+
+/* ---------- tablet e desktop ---------- */
+@media (min-width: 720px) {
+  :root { --gutter: 32px; }
+
+  .cupom__papel { grid-template-columns: 1fr auto minmax(250px, 300px); }
+  .cupom__corpo { padding: 26px 26px 24px; padding-right: 26px; }
+  .cupom__picote {
+    height: auto; margin: 14px 0;
+    border-top: 0; border-left: 2px dashed rgb(43 1 83 / 0.35);
+  }
+  .cupom__tesoura { left: -12px; top: auto; bottom: -4px; transform: rotate(90deg); }
+  .cupom__canhoto { align-content: center; padding: 22px; }
+  .cupom__mascote { right: 34%; top: -54px; width: 100px; }
+
+  .lojas { grid-template-columns: minmax(0, 1fr) auto; align-items: center; padding-inline: max(var(--gutter), calc((100% - var(--largura)) / 2 + var(--gutter))); }
+  .marca-loja--amazon { width: 190px; }
+  .marca-loja--ml { width: 72px; }
+
+  .passos__lista { grid-template-columns: repeat(3, 1fr); gap: 28px; }
+
+  .final { margin: 0 auto 72px; max-width: calc(var(--largura) - 2 * var(--gutter)); padding: 56px 40px; }
+}
+
+@media (min-width: 1000px) {
+  .hero {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    grid-template-areas: "texto logo" "cupom logo";
+    align-items: center;
+    column-gap: 48px;
+    padding-top: 36px; padding-bottom: 96px;
+  }
+  .hero__texto { grid-area: texto; align-self: end; }
+  .cupom { grid-area: cupom; align-self: start; transform: rotate(-1.5deg); }
+  .hero__logo { display: block; grid-area: logo; }
+  .hero__logo img { width: 100%; max-width: 460px; height: auto; margin-left: auto; }
+  .selo-pct--a { right: auto; left: 52%; top: 40px; }
+  .selo-pct--b { display: grid; right: var(--gutter); bottom: 60px; }
+  .topo .marca span { font-size: 1rem; }
+}
+
+/* entrada única do cupom */
+@media (prefers-reduced-motion: no-preference) {
+  .cupom { animation: cupom-entra 0.7s cubic-bezier(.2,.9,.3,1.2) 0.15s both; }
+  @keyframes cupom-entra {
+    from { translate: 0 18px; rotate: 2.5deg; }
+    to   { translate: 0 0; rotate: 0deg; }
+  }
+}
